@@ -4,7 +4,7 @@ use clothes_store;
 
 drop table if exists `address`;
 create table `address` (
-	`id` bigint auto_increment not null,
+	`id` int auto_increment not null,
     `street` varchar(100) not null,
     `district` varchar(100) not null,
     `number` int unsigned not null,
@@ -36,7 +36,7 @@ create table `users` (
     `phone` varchar(20) not null,
     `password` varchar(100) not null,
     `gender` char(1) not null,
-    `address_id` bigint not null,
+    `address_id` int not null,
     primary key(`document`),
     foreign key(`address_id`) references `address`(`id`),
     foreign key(`gender`) references `genders`(`gender`),
@@ -45,7 +45,7 @@ create table `users` (
 
 drop table if exists `payment_methods`;
 create table `payment_methods` (
-	`id` tinyint auto_increment not null,
+	`id` int auto_increment not null,
     `type` varchar(50) not null,
     primary key(`id`)
 );
@@ -53,7 +53,7 @@ create table `payment_methods` (
 drop table if exists `payment_methods_data`;
 create table `payment_methods_data` (
 	`id` int not null,
-    `payment_method_type` tinyint not null,
+    `payment_method_type` int not null,
     `card_number` varchar(19),
     `expiry_date` char(7),
     `cvc` char(3),
@@ -63,7 +63,7 @@ create table `payment_methods_data` (
 
 drop table if exists `users_payment_methods_data`;
 create table `users_payment_methods_data` (
-	`id` bigint auto_increment not null,
+	`id` int auto_increment not null,
 	`payment_method_data_id` int not null,
     `user_document` varchar(14) not null,
     primary key(`id`, `payment_method_data_id`, `user_document`),
@@ -73,7 +73,7 @@ create table `users_payment_methods_data` (
     
 drop table if exists `products_types`;
 create table `products_types` (
-	`id` smallint auto_increment not null,
+	`id` int auto_increment not null,
     `type` varchar(50) not null,
     `gender` char(1) not null,
     `size` char(3) not null,
@@ -83,21 +83,21 @@ create table `products_types` (
 
 drop table if exists `products`;
 create table `products` (
-	`id` bigint auto_increment not null,
-    `type_id` smallint not null,
+	`id` int auto_increment not null,
+    `type_id` int not null,
     `name` varchar(100) not null,
     `brand` varchar(100) not null,
     `price` numeric(5,2) unsigned not null,
     `discount` float unsigned,
-    `quantity_stock` bigint unsigned not null, 
+    `quantity_stock` int unsigned not null, 
     primary key(`id`),
     foreign key(`type_id`) references `products_types`(`id`)
 );
 
 drop table if exists `sales`;
 create table `sales` (
-	`product_id` bigint not null,
-    `buyer_id` bigint not null,
+	`product_id` int not null,
+    `buyer_id` int not null,
     `created_at` datetime not null,
     foreign key(`buyer_id`) references `users_payment_methods_data`(`id`)
 );
