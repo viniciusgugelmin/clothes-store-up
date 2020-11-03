@@ -1,4 +1,4 @@
-package application;
+package com.github.clothesstore.app;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,13 +6,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
+import com.github.clothesstore.dao.DAOFactory;
+import com.github.clothesstore.dao.Payment_methodsDAO;
+import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
+import com.github.clothesstore.db.DB;
+import com.github.clothesstore.db.DbIntegrityException;
+import com.github.clothesstore.model.Payment_methods;
 import com.mysql.jdbc.Connection;
 
-
-import dbConnection.DB;
-import dbConnection.DbIntegrityException;
-
 public class Programa {
+	
+	public static void main(String[] args) {
+		Payment_methods test = new Payment_methods("test");
+		
+		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
+		testDAO.insert(test);
+	}
 /*
 	public static void main(String[] args) {
 
@@ -39,7 +48,7 @@ public class Programa {
 	}
 */
 	
-	
+	/*
 	public static void main(String[] args) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
 		Connection conn = null;
@@ -70,5 +79,7 @@ public class Programa {
 		}
 
 	}
+	*/
+	
 }
 

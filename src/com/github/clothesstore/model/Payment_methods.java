@@ -1,28 +1,22 @@
-package payment.model;
+package com.github.clothesstore.model;
 
 import java.io.Serializable;
 
-public class Payment_methods_data implements Serializable {
+public class Payment_methods implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String type;
 
-	public Payment_methods_data() {
+	public Payment_methods() {
 	}
 
-	public Payment_methods_data(Integer id, String type) {
-
-		this.id = id;
+	public Payment_methods(String type) {
 		this.type = type;
 	}
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getType() {
@@ -49,7 +43,7 @@ public class Payment_methods_data implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Payment_methods_data other = (Payment_methods_data) obj;
+		Payment_methods other = (Payment_methods) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -60,7 +54,7 @@ public class Payment_methods_data implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Payment_methods_data [id=" + id + ", type=" + type + "]";
+		return "payment_methods [id=" + id + ", type=" + type + "]";
 	}
 
 }

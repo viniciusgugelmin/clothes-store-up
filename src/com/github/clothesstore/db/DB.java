@@ -1,4 +1,4 @@
-package dbConnection;
+package com.github.clothesstore.db;
 
 import java.io.FileInputStream;
 import java.sql.DriverManager;
@@ -11,57 +11,53 @@ import com.mysql.jdbc.Connection;
 
 public class DB {
 
-	// metodo para conectar com o banco de dados
-	private static Connection conn = null;
+	// Método para conectar com o banco de dados
+	private static Connection connection = null;
 
 	public static Connection getConnection() {
-		if (conn == null) {
+		if (connection == null) {
 			try {
 				Properties props = loadProperties();
 				String url = props.getProperty("dburl");
-				conn = (Connection) DriverManager.getConnection(url, props);
+				connection = (Connection) DriverManager.getConnection(url, props);
 			} catch (SQLException e) {
-				throw new DbException(e.getMessage());
+				throw new DBException(e.getMessage());
 			}
-
 		}
-		return conn;
+		
+		return connection;
 	}
 
-	// Implementa��o para fechar uma conex�o
+	// Método para fechar uma conexão
 	public static void closeConnection() {
-		if (conn != null) {
+		if (connection != null) {
 			try {
-				conn.close();
+				connection.close();
 			} catch (SQLException e) {
-				throw new DbException(e.getMessage());
+				throw new DBException(e.getMessage());
 			}
 		}
 	}
 
 	private static Properties loadProperties() {
-		// abrindo arquivo e lendo
 		try (FileInputStream fs = new FileInputStream("../db.properties")) {
 			Properties props = new Properties();
 			props.load(fs);
 			return props;
 		} catch (Exception e) {
-			throw new DbException(e.getMessage());
+			throw new DBException(e.getMessage());
 		}
-
 	}
 
-	// metodo AUXILIARES PARA FECHAR OS OBJETOS st, rs, DB e n�o precisar fazer um
-	// try em cada close.
+	// Método AUXILIARES PARA FECHAR OS OBJETOS st, rs, DB e não precisar fazer um
 	public static void closeStatament(Statement st) {
 		if (st != null) {
 			try {
 				st.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				throw new DbException(e.getMessage());
+				throw new DBException(e.getMessage());
 			}
-
 		}
 	}
 
@@ -71,10 +67,8 @@ public class DB {
 				rs.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				throw new DbException(e.getMessage());
+				throw new DBException(e.getMessage());
 			}
-
 		}
 	}
-
 }
