@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
-import com.github.clothesstore.db.DB;
+import com.github.clothesstore.database.DB;
 import com.github.clothesstore.model.Payment_methods;
 
 import java.sql.PreparedStatement;

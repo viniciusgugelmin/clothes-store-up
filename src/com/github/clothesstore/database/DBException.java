@@ -1,4 +1,4 @@
-package com.github.clothesstore.db;
+package com.github.clothesstore.database;
 
 
 public class DBException extends RuntimeException {

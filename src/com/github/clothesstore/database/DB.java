@@ -1,4 +1,4 @@
-package com.github.clothesstore.db;
+package com.github.clothesstore.database;
 
 import java.io.FileInputStream;
 import java.sql.DriverManager;
