@@ -28,7 +28,7 @@ public class DB {
 		return conn;
 	}
 
-	// Implementação para fechar uma conexão
+	// Implementaï¿½ï¿½o para fechar uma conexï¿½o
 	public static void closeConnection() {
 		if (conn != null) {
 			try {
@@ -41,7 +41,7 @@ public class DB {
 
 	private static Properties loadProperties() {
 		// abrindo arquivo e lendo
-		try (FileInputStream fs = new FileInputStream("db.properties")) {
+		try (FileInputStream fs = new FileInputStream("../db.properties")) {
 			Properties props = new Properties();
 			props.load(fs);
 			return props;
@@ -51,7 +51,7 @@ public class DB {
 
 	}
 
-	// metodo AUXILIARES PARA FECHAR OS OBJETOS st, rs, DB e não precisar fazer um
+	// metodo AUXILIARES PARA FECHAR OS OBJETOS st, rs, DB e nï¿½o precisar fazer um
 	// try em cada close.
 	public static void closeStatament(Statement st) {
 		if (st != null) {
