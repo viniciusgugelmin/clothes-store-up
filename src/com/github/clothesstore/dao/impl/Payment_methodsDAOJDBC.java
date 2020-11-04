@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
+import com.github.clothesstore.dao.impl.model.DAOJDBC;
+import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.model.Payment_methods;
 
@@ -21,39 +23,9 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 */
 	@Override
 	public void insert(Payment_methods obj) {
-		Connection connectionDatabase = null;
-		PreparedStatement sqlStatement = null;
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
-		try {
-			connectionDatabase = DB.getConnection();
-			sqlStatement = connectionDatabase.prepareStatement(
-					"INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "')",
-					Statement.RETURN_GENERATED_KEYS);
-			
-			int rowsAffected = sqlStatement.executeUpdate();
-			
-			// Development
-			//
-			if (rowsAffected > 0) {
-				ResultSet resultSqlStatement = sqlStatement.getGeneratedKeys();
-				
-				while(resultSqlStatement.next()) {
-					int id = resultSqlStatement.getInt(1);
-					
-					System.out.println("New row! [id = " + id + "]");
-				}
-			} else {
-				System.out.println("No rows affected");
-			}
-			//
-			// Development
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}  finally {
-			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
-		}
+		DAOJDBCModel.singleCall("INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "')");
 	}
 
 	/*
