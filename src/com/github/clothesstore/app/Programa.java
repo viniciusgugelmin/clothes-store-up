@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 import com.github.clothesstore.dao.AddressDAO;
-import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
+import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DbIntegrityException;
 import com.github.clothesstore.model.Address;

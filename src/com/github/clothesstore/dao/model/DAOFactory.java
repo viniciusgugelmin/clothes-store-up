@@ -1,5 +1,7 @@
-package com.github.clothesstore.dao;
+package com.github.clothesstore.dao.model;
 
+import com.github.clothesstore.dao.AddressDAO;
+import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.AddressDAOJDBC;
 import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
 
