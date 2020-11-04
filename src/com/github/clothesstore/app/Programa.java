@@ -6,11 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
+import com.github.clothesstore.dao.AddressDAO;
 import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DbIntegrityException;
+import com.github.clothesstore.model.Address;
 import com.github.clothesstore.model.Payment_methods;
 import com.mysql.jdbc.Connection;
 
@@ -21,6 +23,13 @@ public class Programa {
 		
 		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
 		testDAO.insert(test);
+		
+	//	Address test1 = new Address("test1");
+		
+	//	AddressDAO testDAO1 = DAOFactory.createAddressDAO();
+	//	testDAO1.insert(test);
+		
+		
 	}
 /*
 	public static void main(String[] args) {
