@@ -19,10 +19,10 @@ import com.mysql.jdbc.Connection;
 public class Programa {
 	
 	public static void main(String[] args) {
-		Payment_methods test = new Payment_methods("test");
+		Payment_methods test = new Payment_methods(1, "BANK_SLIP");
 		
 		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
-		testDAO.insert(test);
+		testDAO.update(test);
 		
 	//	Address test1 = new Address("test1");
 		

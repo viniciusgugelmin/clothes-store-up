@@ -14,9 +14,18 @@ public class Payment_methods implements Serializable {
 	public Payment_methods(String type) {
 		this.type = type;
 	}
+	
+	public Payment_methods(Integer id, String type) {
+		this.id = id;
+		this.type = type;
+	}
 
 	public Integer getId() {
 		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getType() {

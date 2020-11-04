@@ -16,6 +16,9 @@ import java.sql.Statement;
 
 public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 
+	/* 
+	 * Insert values into table
+	 */
 	@Override
 	public void insert(Payment_methods obj) {
 		Connection connectionDatabase = null;
@@ -33,11 +36,11 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 			//
 			if (rowsAffected > 0) {
 				ResultSet resultSqlStatement = sqlStatement.getGeneratedKeys();
-
+				
 				while(resultSqlStatement.next()) {
 					int id = resultSqlStatement.getInt(1);
 					
-					System.out.println("New row! [Id = " + id + "]");
+					System.out.println("New row! [id = " + id + "]");
 				}
 			} else {
 				System.out.println("No rows affected");
@@ -53,10 +56,39 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 		}
 	}
 
+	/*
+	 * Update row from table by id
+	 */
 	@Override
 	public void update(Payment_methods obj) {
-		// TODO Auto-generated method stub
+		Connection connectionDatabase = null;
+		PreparedStatement sqlStatement = null;
 		
+		try {
+			connectionDatabase = DB.getConnection();
+			sqlStatement = connectionDatabase.prepareStatement(
+					"UPDATE payment_methods SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "'",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			int rowsAffected = sqlStatement.executeUpdate();
+			
+			// Development
+			//
+			if (rowsAffected > 0) {
+				System.out.println("Row updated! [id = " + obj.getId() + ", type = " + obj.getType() + "]");
+				
+			} else {
+				System.out.println("No rows affected");
+			}
+			//
+			// Development
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			DB.closeStatament(sqlStatement);
+			DB.closeConnection();
+		}
 	}
 
 	@Override
