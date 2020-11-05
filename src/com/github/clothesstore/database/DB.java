@@ -11,7 +11,6 @@ import com.mysql.jdbc.Connection;
 
 public class DB {
 
-	// Método para conectar com o banco de dados
 	private static Connection connection = null;
 
 	public static Connection getConnection() {
@@ -28,7 +27,6 @@ public class DB {
 		return connection;
 	}
 
-	// Método para fechar uma conexão
 	public static void closeConnection() {
 		if (connection != null) {
 			try {
@@ -49,7 +47,6 @@ public class DB {
 		}
 	}
 
-	// Método AUXILIARES PARA FECHAR OS OBJETOS st, rs, DB e não precisar fazer um
 	public static void closeStatament(Statement st) {
 		if (st != null) {
 			try {

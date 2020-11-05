@@ -32,7 +32,7 @@ public class DAOJDBC {
 			//
 			if (rowsAffected > 0) {
 				ResultSet resultSqlStatement = sqlStatement.getGeneratedKeys();
-				System.out.println(sqlStatement);
+				System.out.println(statementLine);
 		
 			} else {
 				System.out.println("No rows affected");
@@ -46,5 +46,25 @@ public class DAOJDBC {
 			DB.closeStatament(sqlStatement);
 			DB.closeConnection();
 		}
+	}
+	
+	public ResultSet singleCallReturn(String statementLine, Statement sqlStatement) {
+		Connection connectionDatabase = null;
+		
+		try {
+			connectionDatabase = DB.getConnection();
+			sqlStatement = connectionDatabase.createStatement();
+			ResultSet resultStatement = sqlStatement.executeQuery(statementLine);
+		
+			while(resultStatement.next()) {
+				System.out.println(statementLine);
+				return resultStatement;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

@@ -25,7 +25,7 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	public void insert(Payment_methods obj) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
-		DAOJDBCModel.singleCall("INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "')");
+		DAOJDBCModel.singleCall("INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "');");
 	}
 
 	/*
@@ -33,45 +33,40 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 */
 	@Override
 	public void update(Payment_methods obj) {
-		Connection connectionDatabase = null;
-		PreparedStatement sqlStatement = null;
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		
+		DAOJDBCModel.singleCall("UPDATE payment_methods SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "';");
+	}
+
+	/*
+	 * Delete row from table by id
+	 */
+	@Override
+	public void deleteById(Integer id) {
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		
+		DAOJDBCModel.singleCall("DELETE FROM payment_methods WHERE id='" + id + "';");
+	}
+
+	/*
+	 * Find row from table by id
+	 */
+	@Override
+	public Payment_methods findById(Integer id) {
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		Statement sqlStatement = null;
+		
+		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM payment_methods WHERE id='" + id + "';", sqlStatement);
 		
 		try {
-			connectionDatabase = DB.getConnection();
-			sqlStatement = connectionDatabase.prepareStatement(
-					"UPDATE payment_methods SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "'",
-					Statement.RETURN_GENERATED_KEYS);
-			
-			int rowsAffected = sqlStatement.executeUpdate();
-			
-			// Development
-			//
-			if (rowsAffected > 0) {
-				System.out.println("Row updated! [id = " + obj.getId() + ", type = " + obj.getType() + "]");
-				
-			} else {
-				System.out.println("No rows affected");
-			}
-			//
-			// Development
-			
+			return new Payment_methods(item.getInt("id"), item.getString("type"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}  finally {
+		} finally {
 			DB.closeStatament(sqlStatement);
 			DB.closeConnection();
 		}
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Payment_methodsDAO findById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
