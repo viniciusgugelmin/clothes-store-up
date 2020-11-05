@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import com.github.clothesstore.dao.AddressDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
@@ -23,9 +24,12 @@ public class Programa {
 		Integer id = 1;
 		
 		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
-		Payment_methods testt = testDAO.findById(id);
+		List<Payment_methods> lista = testDAO.findAll();
 		
-		System.out.println(testt);
+		for (Payment_methods item : lista) {
+			System.out.println(item);
+		}
+
 		
 	//	Address test1 = new Address("test1");
 		

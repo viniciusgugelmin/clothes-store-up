@@ -2,7 +2,7 @@ package com.github.clothesstore.dao.impl.model;
 
 
 import java.sql.Connection;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
@@ -56,11 +56,28 @@ public class DAOJDBC {
 			sqlStatement = connectionDatabase.createStatement();
 			ResultSet resultStatement = sqlStatement.executeQuery(statementLine);
 		
+			System.out.println(statementLine);
 			while(resultStatement.next()) {
-				System.out.println(statementLine);
 				return resultStatement;
 			}
-
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public ResultSet multiCallReturn(String statementLine, Statement sqlStatement) {
+		Connection connectionDatabase = null;
+		
+		try {
+			connectionDatabase = DB.getConnection();
+			sqlStatement = connectionDatabase.createStatement();
+			ResultSet resultStatement = sqlStatement.executeQuery(statementLine);
+			
+			System.out.println(statementLine);
+			return resultStatement;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

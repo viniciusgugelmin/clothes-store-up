@@ -2,7 +2,7 @@ package com.github.clothesstore.dao.impl;
 
 
 import java.sql.Connection;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
@@ -72,7 +72,25 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 
 	@Override
 	public List<Payment_methods> findAll() {
-		// TODO Auto-generated method stub
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		Statement sqlStatement = null;
+		List<Payment_methods> arrayList = new ArrayList<>();
+		
+		ResultSet array = DAOJDBCModel.multiCallReturn("SELECT * FROM payment_methods;", sqlStatement);
+		
+		try {
+			while(array.next()) {
+				arrayList.add(new Payment_methods(array.getInt("id"), array.getString("type"))); 
+			}
+			
+			return arrayList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DB.closeStatament(sqlStatement);
+			DB.closeConnection();
+		}
+		
 		return null;
 	}
 }
