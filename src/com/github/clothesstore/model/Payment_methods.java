@@ -6,7 +6,7 @@ public class Payment_methods implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String type;
+	private String type = "";
 
 	public Payment_methods() {
 	}
@@ -65,5 +65,4 @@ public class Payment_methods implements Serializable {
 	public String toString() {
 		return "{id=" + id + ", type='" + type + "'}";
 	}
-
 }

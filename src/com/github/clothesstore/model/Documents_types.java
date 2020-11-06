@@ -2,31 +2,45 @@ package com.github.clothesstore.model;
 
 import java.io.Serializable;
 
-public class Documents_type implements Serializable{
+public class Documents_types implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String type;
 	
 	
-	public Documents_type(int int1, String string) {
-		// TODO Auto-generated constructor stub
+	public Documents_types() {
 	}
+
+	public Documents_types(String type) {
+		this.type = type;
+	}
+	
+	public Documents_types(Integer id, String type) {
+		this.id = id;
+		this.type = type;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public String getType() {
 		return type;
 	}
+	
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -34,6 +48,7 @@ public class Documents_type implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -42,7 +57,7 @@ public class Documents_type implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Documents_type other = (Documents_type) obj;
+		Documents_types other = (Documents_types) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -50,9 +65,9 @@ public class Documents_type implements Serializable{
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
-		return "Documents_type [id=" + id + ", type=" + type + "]";
+		return "{id=" + id + ", type=" + type + "}";
 	}
-	
 }

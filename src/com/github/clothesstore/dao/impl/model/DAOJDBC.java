@@ -16,6 +16,9 @@ import java.sql.Statement;
 
 public class DAOJDBC {
 	
+	/*
+	 * Function for single calls without return
+	 */
 	public void singleCall(String statementLine) {
 		Connection connectionDatabase = null;
 		PreparedStatement sqlStatement = null;
@@ -44,10 +47,12 @@ public class DAOJDBC {
 			e.printStackTrace();
 		}  finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 	}
 	
+	/*
+	 * Function for single calls with return
+	 */
 	public ResultSet singleCallReturn(String statementLine, Statement sqlStatement) {
 		Connection connectionDatabase = null;
 		
@@ -67,6 +72,9 @@ public class DAOJDBC {
 		return null;
 	}
 	
+	/*
+	 * Function for multi calls with return
+	 */
 	public ResultSet multiCallReturn(String statementLine, Statement sqlStatement) {
 		Connection connectionDatabase = null;
 		

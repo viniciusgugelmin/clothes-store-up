@@ -8,35 +8,39 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.github.clothesstore.dao.AddressDAO;
+import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DbIntegrityException;
 import com.github.clothesstore.model.Address;
+import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Payment_methods;
 import com.mysql.jdbc.Connection;
 
 public class Programa {
 	
 	public static void main(String[] args) {
-		Payment_methods test = new Payment_methods(3, "A");
-		Integer id = 1;
+		Address item = new Address();
+		item.setId(8);
+		item.setStreet("AA");
+		item.setDistrict("AA");
+		item.setNumber(1111);
 		
-		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
-		List<Payment_methods> lista = testDAO.findAll();
+		AddressDAO testDAO2 = DAOFactory.createAddressDAO();
 		
-		for (Payment_methods item : lista) {
-			System.out.println(item);
-		}
+		testDAO2.insert(item);
 
+		AddressDAO testDAO = DAOFactory.createAddressDAO();
+
+		List<Address> itemResult = testDAO.findAll();
+
+		for (Address a : itemResult) {
+			System.out.println(a);
+		}
 		
-	//	Address test1 = new Address("test1");
-		
-	//	AddressDAO testDAO1 = DAOFactory.createAddressDAO();
-	//	testDAO1.insert(test);
-		
-		
+		DB.closeConnection();
 	}
 /*
 	public static void main(String[] args) {

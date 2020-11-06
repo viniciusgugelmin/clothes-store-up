@@ -1,41 +1,37 @@
 package com.github.clothesstore.dao.impl;
 
-
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.github.clothesstore.dao.Payment_methodsDAO;
-import com.github.clothesstore.dao.impl.model.DAOJDBC;
-import com.github.clothesstore.dao.model.DAOFactory;
-import com.github.clothesstore.database.DB;
-import com.github.clothesstore.model.Payment_methods;
-
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
+import com.github.clothesstore.dao.Documents_typesDAO;
+import com.github.clothesstore.dao.impl.model.DAOJDBC;
+import com.github.clothesstore.database.DB;
+import com.github.clothesstore.model.Documents_types;
+import com.github.clothesstore.model.Payment_methods;
+
+public class Documents_typesDAOJDBC implements Documents_typesDAO {
 
 	/* 
 	 * Insert values into table
 	 */
 	@Override
-	public void insert(Payment_methods obj) {
+	public void insert(Documents_types obj) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
-		DAOJDBCModel.singleCall("INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "');");
+		DAOJDBCModel.singleCall("INSERT INTO documents_types (type) VALUES ('" + obj.getType() + "');");
 	}
 
 	/*
 	 * Update row from table by id
 	 */
 	@Override
-	public void update(Payment_methods obj) {
+	public void update(Documents_types obj) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
-		DAOJDBCModel.singleCall("UPDATE payment_methods SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "';");
+		DAOJDBCModel.singleCall("UPDATE documents_types SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "';");
 	}
 
 	/*
@@ -45,21 +41,21 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	public void deleteById(Integer id) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
-		DAOJDBCModel.singleCall("DELETE FROM payment_methods WHERE id='" + id + "';");
+		DAOJDBCModel.singleCall("DELETE FROM documents_types WHERE id='" + id + "';");
 	}
 
 	/*
 	 * Find row from table by id
 	 */
 	@Override
-	public Payment_methods findById(Integer id) {
+	public Documents_types findById(Integer id) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
 		
-		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM payment_methods WHERE id='" + id + "';", sqlStatement);
+		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM documents_types WHERE id='" + id + "';", sqlStatement);
 		
 		try {
-			return new Payment_methods(item.getInt("id"), item.getString("type"));
+			return new Documents_types(item.getInt("id"), item.getString("type"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -74,16 +70,16 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 * Find all rows from table
 	 */
 	@Override
-	public List<Payment_methods> findAll() {
+	public List<Documents_types> findAll() {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
-		List<Payment_methods> arrayList = new ArrayList<>();
+		List<Documents_types> arrayList = new ArrayList<>();
 		
-		ResultSet array = DAOJDBCModel.multiCallReturn("SELECT * FROM payment_methods;", sqlStatement);
+		ResultSet array = DAOJDBCModel.multiCallReturn("SELECT * FROM documents_types;", sqlStatement);
 		
 		try {
 			while(array.next()) {
-				arrayList.add(new Payment_methods(array.getInt("id"), array.getString("type"))); 
+				arrayList.add(new Documents_types(array.getInt("id"), array.getString("type"))); 
 			}
 			
 			return arrayList;
