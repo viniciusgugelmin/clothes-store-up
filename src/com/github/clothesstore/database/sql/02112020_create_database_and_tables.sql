@@ -12,6 +12,9 @@ create table `address` (
     primary key(`id`)
 );
 
+delete from address;
+select* from address;
+
 drop table if exists `genders`;
 create table `genders` (
 	`gender` char(1) not null,
