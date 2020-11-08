@@ -1,111 +1,59 @@
 package com.github.clothesstore.app;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import com.github.clothesstore.dao.AddressDAO;
-import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
-import com.github.clothesstore.dao.impl.Payment_methodsDAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
-import com.github.clothesstore.database.DbIntegrityException;
-import com.github.clothesstore.model.Address;
-import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Payment_methods;
-import com.mysql.jdbc.Connection;
 
 public class Programa {
 	
 	public static void main(String[] args) {
+		
 		/*
-		Address item = new Address();
-		item.setId(8);
-		item.setStreet("AA");
-		item.setDistrict("AA");
-		item.setNumber(1111);
+		 * Payment_methods
+		 */
 		
-		AddressDAO testDAO2 = DAOFactory.createAddressDAO();
+		Payment_methods paymentMethod = new Payment_methods();
+		Payment_methodsDAO paymentMethodDAO = DAOFactory.createPayment_methodsDAO();
 		
-		testDAO2.insert(item);
-
-		AddressDAO testDAO = DAOFactory.createAddressDAO();
-
-		List<Address> itemResult = testDAO.findAll();
-
-		for (Address a : itemResult) {
-			System.out.println(a);
-		}
-		*/
+		// insert
+		paymentMethod.setType("BANK_SLIP");
+		paymentMethodDAO.insert(paymentMethod);
 		
-		Payment_methods item = new Payment_methods();
-		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
-		testDAO.deleteById(0);
+		// findById
+		System.out.println(paymentMethodDAO.findById(1));
+		
+		// update
+		paymentMethod.setId(1);
+		paymentMethod.setType("CREDIT_CARD");
+		paymentMethodDAO.update(paymentMethod);
+		
+		// findById
+		System.out.println(paymentMethodDAO.findById(1));
+		
+		// insert
+		paymentMethod.setType("BANK_SLIP");
+		paymentMethodDAO.insert(paymentMethod);
+		
+		// findAll
+		System.out.println(paymentMethodDAO.findAll());
+		
+		// deleteById
+		paymentMethodDAO.deleteById(1);
+		
+		// findAll
+		System.out.println(paymentMethodDAO.findAll());
+		
+		// deleteById
+		paymentMethodDAO.deleteById(2);
+		
+		// findAll
+		System.out.println(paymentMethodDAO.findAll());
+		
+		/*
+		 * CLOSE CONNECTION
+		 */
 		
 		DB.closeConnection();
 	}
-/*
-	public static void main(String[] args) {
-
-		Connection conn = null;
-		PreparedStatement st = null;
-		try {
-			// Connect to the database
-			conn = DB.getConnection();
-
-			st = conn.prepareStatement(" DELETE FROM payment_methods " + " WHERE " + " Id = ?");
-
-			st.setInt(1, 7);
-
-			int rowsAffected = st.executeUpdate();
-			System.out.println("Done! Rows Affected :" + rowsAffected);
-
-		} catch (SQLException e) {
-			throw new DbIntegrityException(e.getMessage());
-		} finally {
-			DB.closeStatament(st);
-			DB.closeConnection();
-		}
-
-	}
-*/
-	
-	/*
-	public static void main(String[] args) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-		Connection conn = null;
-		PreparedStatement st = null;
-		try {
-			conn = DB.getConnection();
-
-			st = conn.prepareStatement(
-					"insert into payment_methods (type) values ('D1'), ('D2')",
-					Statement.RETURN_GENERATED_KEYS	);
-			// Quantas linhas foram afetadas rows affected
-			int rowsAffected = st.executeUpdate();
-			if(rowsAffected > 0) {
-				ResultSet rs = st.getGeneratedKeys();
-				while(rs.next()) {
-					int id = rs.getInt(1);
-					System.out.println("Done! Id = " + id);
-				}
-				
-			}else {
-				System.out.println(" No rows affected");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace( );
-		}  finally {
-			DB.closeStatament(st);
-			DB.closeConnection();
-		}
-
-	}
-	*/
-	
 }
-

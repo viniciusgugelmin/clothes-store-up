@@ -67,6 +67,6 @@ public class Payment_methods implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{id=" + id + ", type='" + type + "'}";
+		return "{id:" + id + ", type:'" + type + "'}";
 	}
 }

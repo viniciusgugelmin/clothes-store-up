@@ -28,6 +28,6 @@ public class ValidationReturn {
 	
 	@Override
 	public String toString() {
-		return "[STATUS: " + status + ", RESPONSE: " + response + "]";
+		return "{STATUS: " + status + ", RESPONSE: " + response + "}";
 	}
 }

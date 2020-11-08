@@ -131,7 +131,7 @@ public class Address implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "{id=" + id + ", street='" + street + "', district='" + district + "', number=" + number
-				+ ", note='" + note + "'}";
+		return "{id:" + id + ", street:'" + street + "', district:'" + district + "', number:" + number
+				+ ", note:'" + note + "'}";
 	}	
 }
