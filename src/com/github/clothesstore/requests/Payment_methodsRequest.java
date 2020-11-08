@@ -18,7 +18,7 @@ public class Payment_methodsRequest {
 	public ValidationReturn update(Payment_methods obj) {
 		ValidationReturn validationReturn = new ValidationReturn();
 		
-		if (obj.getId().equals(0)) {
+		if (obj.getId().equals(0) || obj.getId() < 0) {
 			validationReturn.setStatus(422);
 			validationReturn.setResponse("'id' is missing");
 		}
@@ -34,7 +34,7 @@ public class Payment_methodsRequest {
 	public ValidationReturn deleteById(Integer id) {
 		ValidationReturn validationReturn = new ValidationReturn();
 		
-		if (id.equals(0)) {
+		if (id.equals(0) || id < 0) {
 			validationReturn.setStatus(422);
 			validationReturn.setResponse("'id' is missing");
 		}
@@ -45,7 +45,7 @@ public class Payment_methodsRequest {
 	public ValidationReturn findById(Integer id) {
 		ValidationReturn validationReturn = new ValidationReturn();
 		
-		if (id.equals(0)) {
+		if (id.equals(0) || id < 0) {
 			validationReturn.setStatus(422);
 			validationReturn.setResponse("'id' is missing");
 		}

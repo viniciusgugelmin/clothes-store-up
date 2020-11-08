@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Address implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private Integer id = 0;
 	private String street = "";
 	private String district = "";
 	private Integer number = 0;

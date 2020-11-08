@@ -10,16 +10,28 @@ import com.github.clothesstore.dao.AddressDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.database.DB;
+import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Address;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.requests.AddressRequest;
+import com.github.clothesstore.requests.Payment_methodsRequest;
+import com.github.clothesstore.requests.ValidationReturn;
 
 public class AddressDAOJDBC implements AddressDAO {
 
+	private AddressRequest validator = new AddressRequest();
+	
 	/* 
 	 * Insert values into table
 	 */
 	@Override
 	public void insert(Address obj) {
+		ValidationReturn validation = validator.insert(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		String collumsToInsert = "street, district, number";
@@ -35,7 +47,34 @@ public class AddressDAOJDBC implements AddressDAO {
 
 	@Override
 	public void update(Address obj) {
-		// TODO Auto-generated method stub
+		ValidationReturn validation = validator.update(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		String valuesToUpdate = "";
+		
+		
+		if (!obj.getStreet().isEmpty() && !obj.getStreet().equals("") && !obj.getStreet().equals("null")) {
+			valuesToUpdate += ("street='" + obj.getStreet() + "' ");
+		}
+		
+		if (!obj.getDistrict().isEmpty() && !obj.getDistrict().equals("") && !obj.getDistrict().equals("null")) {
+			valuesToUpdate += ("district='" + obj.getDistrict() + "' ");
+		}
+		
+		if (obj.getNumber() > 0) {
+			valuesToUpdate += ("number=" + obj.getNumber() + " ");
+		}
+		
+		if (!obj.getNote().isEmpty() && !obj.getNote().equals("") && !obj.getNote().equals("null")) {
+			valuesToUpdate += ("note='" + obj.getNote() + "' ");
+		}
+
+		DAOJDBCModel.singleCall("UPDATE address SET " + valuesToUpdate + "WHERE " + obj.getId() + 
+				"='" + obj.getId() + "';");
 	}
 	
 	/*
@@ -43,6 +82,12 @@ public class AddressDAOJDBC implements AddressDAO {
 	 */
 	@Override
 	public void update(Address obj, String mainItem) {
+		ValidationReturn validation = validator.update(obj, mainItem);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		String valuesToUpdate = "";
 		
@@ -72,6 +117,12 @@ public class AddressDAOJDBC implements AddressDAO {
 	 */
 	@Override
 	public void deleteById(Integer id) {
+		ValidationReturn validation = validator.deleteById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM address WHERE id='" + id + "';");
@@ -82,6 +133,12 @@ public class AddressDAOJDBC implements AddressDAO {
 	 */
 	@Override
 	public Address findById(Integer id) {
+		ValidationReturn validation = validator.findById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
 		
