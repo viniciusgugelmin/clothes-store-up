@@ -9,7 +9,10 @@ import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
+import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.requests.Payment_methodsRequest;
+import com.github.clothesstore.requests.ValidationReturn;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,12 +20,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
+	
+	private Payment_methodsRequest validator = new Payment_methodsRequest();
 
 	/* 
 	 * Insert values into table
 	 */
 	@Override
 	public void insert(Payment_methods obj) {
+		ValidationReturn validation = validator.insert(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("INSERT INTO payment_methods (type) VALUES ('" + obj.getType() + "');");
@@ -33,6 +44,12 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 */
 	@Override
 	public void update(Payment_methods obj) {
+		ValidationReturn validation = validator.update(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("UPDATE payment_methods SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "';");
@@ -43,6 +60,12 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 */
 	@Override
 	public void deleteById(Integer id) {
+		ValidationReturn validation = validator.deleteById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM payment_methods WHERE id='" + id + "';");
@@ -53,6 +76,11 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 	 */
 	@Override
 	public Payment_methods findById(Integer id) {
+		ValidationReturn validation = validator.findById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
 		
@@ -64,7 +92,6 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;
@@ -91,7 +118,6 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;

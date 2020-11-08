@@ -5,10 +5,14 @@ import java.io.Serializable;
 public class Payment_methods implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private Integer id = 0;
 	private String type = "";
 
 	public Payment_methods() {
+	}
+	
+	public Payment_methods(Integer id) {
+		this.id = id;
 	}
 
 	public Payment_methods(String type) {

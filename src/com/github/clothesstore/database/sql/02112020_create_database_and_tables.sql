@@ -1,6 +1,6 @@
-drop database if exists clothes_store;
-create database clothes_store;
-use clothes_store;
+drop database if exists `clothes_store`;
+create database `clothes_store`;
+use `clothes_store`;
 
 drop table if exists `address`;
 create table `address` (

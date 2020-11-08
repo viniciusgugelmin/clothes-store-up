@@ -22,6 +22,7 @@ import com.mysql.jdbc.Connection;
 public class Programa {
 	
 	public static void main(String[] args) {
+		/*
 		Address item = new Address();
 		item.setId(8);
 		item.setStreet("AA");
@@ -39,6 +40,11 @@ public class Programa {
 		for (Address a : itemResult) {
 			System.out.println(a);
 		}
+		*/
+		
+		Payment_methods item = new Payment_methods();
+		Payment_methodsDAO testDAO = DAOFactory.createPayment_methodsDAO();
+		testDAO.deleteById(0);
 		
 		DB.closeConnection();
 	}

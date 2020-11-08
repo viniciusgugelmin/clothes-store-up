@@ -94,7 +94,6 @@ public class AddressDAOJDBC implements AddressDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;
@@ -122,7 +121,6 @@ public class AddressDAOJDBC implements AddressDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;
