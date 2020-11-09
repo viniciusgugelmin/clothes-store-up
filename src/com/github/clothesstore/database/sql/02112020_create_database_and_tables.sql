@@ -36,11 +36,18 @@ create table `users` (
     `phone` varchar(20) not null,
     `password` varchar(100) not null,
     `gender` char(1) not null,
-    `address_id` int not null,
     primary key(`document`),
-    foreign key(`address_id`) references `address`(`id`),
     foreign key(`gender`) references `genders`(`gender`),
     foreign key(`document_id`) references `documents_types`(`id`)
+);
+
+drop table if exists `address_users`;
+create table `address_users` (
+	`id_address` int not null,
+    `document_user` varchar(14) not null,
+    primary key(`id_address`, `document_user`),
+    foreign key(`document_user`) references `users`(`document`),
+    foreign key(`id_address`) references `address`(`id`)
 );
 
 drop table if exists `payment_methods`;

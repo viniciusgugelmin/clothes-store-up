@@ -6,44 +6,27 @@ public class Genders implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String genders;
-
-	public String getGender() {
-		return genders;
+	private char gender = '0';
+	
+	public Genders() {
+		
+	}
+	
+	public Genders(char gender) {
+		this.gender = gender;
 	}
 
-	public void setGender(String gender) {
-		this.genders = gender;
+	public char getGender() {
+		return gender;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((genders == null) ? 0 : genders.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Genders other = (Genders) obj;
-		if (genders == null) {
-			if (other.genders != null)
-				return false;
-		} else if (!genders.equals(other.genders))
-			return false;
-		return true;
+	public void setGender(char gender) {
+		this.gender = gender;
 	}
 
 	@Override
 	public String toString() {
-		return "Genders [gender=" + genders + "]";
+		return "{gender:'" + gender + "'}";
 	}
 	
 	

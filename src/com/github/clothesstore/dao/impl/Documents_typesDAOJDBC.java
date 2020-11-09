@@ -73,6 +73,12 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 	 */
 	@Override
 	public Documents_types findById(Integer id) {
+		ValidationReturn validation = validator.findById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
 		

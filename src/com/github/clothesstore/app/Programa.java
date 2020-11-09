@@ -2,11 +2,13 @@ package com.github.clothesstore.app;
 
 import com.github.clothesstore.dao.AddressDAO;
 import com.github.clothesstore.dao.Documents_typesDAO;
+import com.github.clothesstore.dao.GendersDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.model.Address;
 import com.github.clothesstore.model.Documents_types;
+import com.github.clothesstore.model.Genders;
 import com.github.clothesstore.model.Payment_methods;
 
 public class Programa {
@@ -145,6 +147,47 @@ public class Programa {
 		
 		// findAll
 		System.out.println(addressDAO.findAll());
+		
+		/*
+		 * Genders
+		 */
+		System.out.println("\ngenders");
+		
+		Genders genders = new Genders();
+		GendersDAO gendersDAO = DAOFactory.createGendersDAO();
+		
+		// insert
+		genders.setGender('M');
+		gendersDAO.insert(genders);
+		
+		// findAll
+		System.out.println(gendersDAO.findAll());
+		
+		// update
+		genders.setGender('F');
+		gendersDAO.update(genders, 'M');
+		
+		// findAll
+		System.out.println(gendersDAO.findAll());
+		
+		// insert
+		genders.setGender('M');
+		gendersDAO.insert(genders);
+		
+		// findAll
+		System.out.println(gendersDAO.findAll());
+		
+		// deleteById
+		gendersDAO.deleteByGender('F');
+		
+		// findAll
+		System.out.println(gendersDAO.findAll());
+		
+		// deleteById
+		gendersDAO.deleteByGender('M');
+		
+		// findAll
+		System.out.println(gendersDAO.findAll());
 		
 		/*
 		 * CLOSE CONNECTION

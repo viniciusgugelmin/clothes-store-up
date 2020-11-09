@@ -2,27 +2,12 @@ package com.github.clothesstore.dao;
 
 import java.util.List;
 
+import com.github.clothesstore.dao.model.DAO;
 import com.github.clothesstore.model.Genders;
 
-public interface GendersDAO {
-
-	void insert(Genders obj);
-
-	List<Genders> findAll();
-
-	void update(Genders gender);
-
-	void deleteById(Genders gender);
-
-	GendersDAO findById(Genders gender);
-
-	GendersDAO findById(char gender);
-
-	void deleteByGender(Genders gender);
-
+public interface GendersDAO extends DAO<Genders>{
+	
+	void update(Genders obj, char oldGender);
 	void deleteByGender(char gender);
-
-
-
-
+	List<Genders> findAll();
 }
