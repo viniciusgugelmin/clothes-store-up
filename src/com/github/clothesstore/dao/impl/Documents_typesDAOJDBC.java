@@ -9,16 +9,28 @@ import java.util.List;
 import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.database.DB;
+import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.requests.Documents_typesRequest;
+import com.github.clothesstore.requests.Payment_methodsRequest;
+import com.github.clothesstore.requests.ValidationReturn;
 
 public class Documents_typesDAOJDBC implements Documents_typesDAO {
+	
+	private Documents_typesRequest validator = new Documents_typesRequest();
 
 	/* 
 	 * Insert values into table
 	 */
 	@Override
 	public void insert(Documents_types obj) {
+		ValidationReturn validation = validator.insert(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("INSERT INTO documents_types (type) VALUES ('" + obj.getType() + "');");
@@ -29,6 +41,12 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 	 */
 	@Override
 	public void update(Documents_types obj) {
+		ValidationReturn validation = validator.update(obj);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("UPDATE documents_types SET type='" + obj.getType() + "' WHERE id='" + obj.getId() + "';");
@@ -39,6 +57,12 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 	 */
 	@Override
 	public void deleteById(Integer id) {
+		ValidationReturn validation = validator.deleteById(id);
+		
+		if (!validation.getStatus().equals(200)) {
+			throw new DBException(validation.toString());
+		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM documents_types WHERE id='" + id + "';");
@@ -60,7 +84,6 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;
@@ -87,7 +110,6 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 			e.printStackTrace();
 		} finally {
 			DB.closeStatament(sqlStatement);
-			DB.closeConnection();
 		}
 		
 		return null;

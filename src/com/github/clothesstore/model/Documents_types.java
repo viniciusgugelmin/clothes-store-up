@@ -5,11 +5,14 @@ import java.io.Serializable;
 public class Documents_types implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private String type;
-	
+	private Integer id = 0;
+	private String type = "";
 	
 	public Documents_types() {
+	}
+
+	public Documents_types(Integer id) {
+		this.id = id;
 	}
 
 	public Documents_types(String type) {
@@ -68,6 +71,6 @@ public class Documents_types implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "{id=" + id + ", type=" + type + "}";
+		return "{id:" + id + ", type:'" + type + "'}";
 	}
 }

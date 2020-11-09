@@ -1,8 +1,12 @@
 package com.github.clothesstore.app;
 
+import com.github.clothesstore.dao.AddressDAO;
+import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
+import com.github.clothesstore.model.Address;
+import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Payment_methods;
 
 public class Programa {
@@ -12,6 +16,7 @@ public class Programa {
 		/*
 		 * Payment_methods
 		 */
+		System.out.println("payment_methods");
 		
 		Payment_methods paymentMethod = new Payment_methods();
 		Payment_methodsDAO paymentMethodDAO = DAOFactory.createPayment_methodsDAO();
@@ -49,6 +54,97 @@ public class Programa {
 		
 		// findAll
 		System.out.println(paymentMethodDAO.findAll());
+		
+		/*
+		 * Documents_types
+		 */
+		System.out.println("\ndocuments_types");
+		
+		Documents_types documentsType = new Documents_types();
+		Documents_typesDAO documentsTypeDAO = DAOFactory.createDocuments_typesDAO();
+		
+		// insert
+		documentsType.setType("CPF");
+		documentsTypeDAO.insert(documentsType);
+		
+		// findById
+		System.out.println(documentsTypeDAO.findById(1));
+		
+		// update
+		documentsType.setId(1);
+		documentsType.setType("CNPJ");
+		documentsTypeDAO.update(documentsType);
+		
+		// findById
+		System.out.println(documentsTypeDAO.findById(1));
+		
+		// insert
+		documentsType.setType("CPF");
+		documentsTypeDAO.insert(documentsType);
+		
+		// findAll
+		System.out.println(documentsTypeDAO.findAll());
+		
+		// deleteById
+		documentsTypeDAO.deleteById(1);
+		
+		// findAll
+		System.out.println(documentsTypeDAO.findAll());
+		
+		// deleteById
+		documentsTypeDAO.deleteById(2);
+		
+		// findAll
+		System.out.println(documentsTypeDAO.findAll());
+		
+		/*
+		 * Address
+		 */
+		System.out.println("\naddress");
+		
+		Address address = new Address();
+		AddressDAO addressDAO = DAOFactory.createAddressDAO();
+		
+		// insert
+		address.setStreet("Travessa Célia Cardozo dos Santos");
+		address.setDistrict("Alto Boqueirão");
+		address.setNumber(1000);
+		addressDAO.insert(address);
+		
+		// findById
+		System.out.println(addressDAO.findById(1));
+		
+		// update
+		address.setId(1);
+		address.setStreet("Rua Piraquara");
+		address.setDistrict("Sítio Cercado");
+		address.setNote("AP 15");
+		addressDAO.update(address);
+		
+		// findById
+		System.out.println(addressDAO.findById(1));
+		
+		// insert
+		address.setStreet("Travessa Célia Cardozo dos Santos");
+		address.setDistrict("Alto Boqueirão");
+		address.setNumber(1000);
+		address.setNote("");
+		addressDAO.insert(address);
+		
+		// findAll
+		System.out.println(addressDAO.findAll());
+		
+		// deleteById
+		addressDAO.deleteById(1);
+		
+		// findAll
+		System.out.println(addressDAO.findAll());
+		
+		// deleteById
+		addressDAO.deleteById(2);
+		
+		// findAll
+		System.out.println(addressDAO.findAll());
 		
 		/*
 		 * CLOSE CONNECTION

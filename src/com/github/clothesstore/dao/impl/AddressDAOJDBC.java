@@ -58,15 +58,36 @@ public class AddressDAOJDBC implements AddressDAO {
 		
 		
 		if (!obj.getStreet().isEmpty() && !obj.getStreet().equals("") && !obj.getStreet().equals("null")) {
-			valuesToUpdate += ("street='" + obj.getStreet() + "' ");
+			valuesToUpdate += ("street='" + obj.getStreet() + "'");
+			
+			if ( 
+					(!obj.getDistrict().isEmpty() && !obj.getDistrict().equals("") && !obj.getDistrict().equals("null")) ||
+					(obj.getNumber() > 0) ||
+					(!obj.getNote().isEmpty() && !obj.getNote().equals("") && !obj.getNote().equals("null"))
+				) {
+				valuesToUpdate += ", ";
+			}
 		}
 		
 		if (!obj.getDistrict().isEmpty() && !obj.getDistrict().equals("") && !obj.getDistrict().equals("null")) {
-			valuesToUpdate += ("district='" + obj.getDistrict() + "' ");
+			valuesToUpdate += ("district='" + obj.getDistrict() + "'");
+			
+			if ( 
+					(obj.getNumber() > 0) ||
+					(!obj.getNote().isEmpty() && !obj.getNote().equals("") && !obj.getNote().equals("null"))
+				) {
+				valuesToUpdate += ", ";
+			}
 		}
 		
 		if (obj.getNumber() > 0) {
-			valuesToUpdate += ("number=" + obj.getNumber() + " ");
+			valuesToUpdate += ("number=" + obj.getNumber());
+			
+			if ( 
+					(!obj.getNote().isEmpty() && !obj.getNote().equals("") && !obj.getNote().equals("null"))
+				) {
+				valuesToUpdate += ", ";
+			}
 		}
 		
 		if (!obj.getNote().isEmpty() && !obj.getNote().equals("") && !obj.getNote().equals("null")) {
