@@ -59,7 +59,7 @@ create table `payment_methods` (
 
 drop table if exists `payment_methods_data`;
 create table `payment_methods_data` (
-	`id` int not null,
+	`id` int auto_increment not null,
     `payment_method_type` int not null,
     `card_number` varchar(19),
     `expiry_date` char(7),
