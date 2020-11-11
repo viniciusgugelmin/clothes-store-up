@@ -85,7 +85,9 @@ public class Documents_typesDAOJDBC implements Documents_typesDAO {
 		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM documents_types WHERE id='" + id + "';", sqlStatement);
 		
 		try {
-			return new Documents_types(item.getInt("id"), item.getString("type"));
+			if (item != null) {
+				return new Documents_types(item.getInt("id"), item.getString("type"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

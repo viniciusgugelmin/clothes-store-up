@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
+import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
@@ -66,6 +67,11 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 			throw new DBException(validation.toString());
 		}
 		
+		// Delete dependencies
+		Payment_methods_dataDAO paymentMethodDAO = DAOFactory.createPayment_methods_dataDAO();
+		paymentMethodDAO.deleteByType(id);
+		// Delete dependencies
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM payment_methods WHERE id='" + id + "';");
@@ -85,9 +91,11 @@ public class Payment_methodsDAOJDBC implements Payment_methodsDAO {
 		Statement sqlStatement = null;
 		
 		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM payment_methods WHERE id='" + id + "';", sqlStatement);
-		
+
 		try {
-			return new Payment_methods(item.getInt("id"), item.getString("type"));
+			if (item != null) {
+				return new Payment_methods(item.getInt("id"), item.getString("type"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

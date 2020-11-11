@@ -102,7 +102,7 @@ public class AddressDAOJDBC implements AddressDAO {
 	 * Update row from main item selected by user
 	 */
 	@Override
-	public void update(Address obj, String mainItem) {
+	public void update(Address obj, String mainItem, Address oldObj) {
 		ValidationReturn validation = validator.update(obj, mainItem);
 		
 		if (!validation.getStatus().equals(200)) {
@@ -130,7 +130,7 @@ public class AddressDAOJDBC implements AddressDAO {
 		}
 
 		DAOJDBCModel.singleCall("UPDATE address SET " + valuesToUpdate + "WHERE " + mainItem + 
-				"='" + obj.getByString(mainItem) + "';");
+				"='" + oldObj.getByString(mainItem) + "';");
 	}
 
 	/*
@@ -166,8 +166,10 @@ public class AddressDAOJDBC implements AddressDAO {
 		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM address WHERE id='" + id + "';", sqlStatement);
 		
 		try {
-			return new Address(item.getInt("id"), item.getString("street"), item.getString("district"),
-					item.getInt("number"), item.getString("note"));
+			if (item != null) {
+				return new Address(item.getInt("id"), item.getString("street"), item.getString("district"),
+						item.getInt("number"), item.getString("note"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -33,9 +33,9 @@ public class DAOJDBC {
 			
 			// Development
 			//
+			System.out.println(statementLine);
 			if (rowsAffected > 0) {
 				ResultSet resultSqlStatement = sqlStatement.getGeneratedKeys();
-				System.out.println(statementLine);
 		
 			} else {
 				System.out.println("No rows affected");
@@ -62,8 +62,11 @@ public class DAOJDBC {
 			ResultSet resultStatement = sqlStatement.executeQuery(statementLine);
 		
 			System.out.println(statementLine);
-			while(resultStatement.next()) {
-				return resultStatement;
+			
+			if (resultStatement.isBeforeFirst()) {
+				while(resultStatement.next()) {
+					return resultStatement;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
