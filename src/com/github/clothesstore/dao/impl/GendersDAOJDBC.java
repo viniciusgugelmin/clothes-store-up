@@ -13,6 +13,7 @@ import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Genders;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.model.Users;
 import com.github.clothesstore.requests.Documents_typesRequest;
 import com.github.clothesstore.requests.GendersRequest;
 import com.github.clothesstore.requests.ValidationReturn;
@@ -67,6 +68,29 @@ public class GendersDAOJDBC implements GendersDAO {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM genders WHERE gender='" + gender + "';");
+	}
+	
+	/*
+	 * Find row from table by document
+	 */
+	@Override
+	public Genders findByGender(char gender) {
+		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		Statement sqlStatement = null;
+		
+		ResultSet item = DAOJDBCModel.singleCallReturn("SELECT * FROM genders WHERE gender='" + gender + "';", sqlStatement);
+		
+		try {
+			if (item != null) {
+				return new Genders(item.getString("gender").charAt(0));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DB.closeStatament(sqlStatement);
+		}
+		
+		return null;
 	}
 	
 	/*

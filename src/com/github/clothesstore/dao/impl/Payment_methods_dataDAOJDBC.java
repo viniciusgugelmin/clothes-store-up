@@ -89,6 +89,7 @@ public class Payment_methods_dataDAOJDBC implements Payment_methods_dataDAO {
 		if (!validation.getStatus().equals(200)) {
 			throw new DBException(validation.toString());
 		}
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		Statement sqlStatement = null;
 		
