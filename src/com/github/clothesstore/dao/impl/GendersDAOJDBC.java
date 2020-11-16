@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.GendersDAO;
+import com.github.clothesstore.dao.UsersDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
+import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Genders;
@@ -64,6 +66,11 @@ public class GendersDAOJDBC implements GendersDAO {
 		if (!validation.getStatus().equals(200)) {
 			throw new DBException(validation.toString());
 		}
+		
+		// Delete dependencies
+		UsersDAO userDAO = DAOFactory.createUsersDAO();
+		userDAO.deleteByGender(gender);
+		// Delete dependencies
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		

@@ -28,7 +28,5 @@ public class Genders implements Serializable {
 	public String toString() {
 		return "{gender:'" + gender + "'}";
 	}
-	
-	
 }
 

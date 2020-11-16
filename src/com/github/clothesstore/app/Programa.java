@@ -1,6 +1,13 @@
 package com.github.clothesstore.app;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.github.clothesstore.dao.AddressDAO;
+import com.github.clothesstore.dao.Address_usersDAO;
 import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.GendersDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
@@ -9,6 +16,7 @@ import com.github.clothesstore.dao.UsersDAO;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.model.Address;
+import com.github.clothesstore.model.Address_users;
 import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Genders;
 import com.github.clothesstore.model.Payment_methods;
@@ -22,7 +30,7 @@ public class Programa {
 		/*
 		 * Address
 		 */
-		System.out.println("\naddress");
+		System.out.println("address");
 		
 		Address address = new Address();
 		AddressDAO addressDAO = DAOFactory.createAddressDAO();
@@ -57,16 +65,16 @@ public class Programa {
 		System.out.println(addressDAO.findAll());
 		
 		// deleteById
-		addressDAO.deleteById(1);
+		//addressDAO.deleteById(1);
 		
 		// findAll
-		System.out.println(addressDAO.findAll());
+		//System.out.println(addressDAO.findAll());
 		
 		// deleteById
-		addressDAO.deleteById(2);
+		//addressDAO.deleteById(2);
 		
 		// findAll
-		System.out.println(addressDAO.findAll());
+		//System.out.println(addressDAO.findAll());
 		
 		/*
 		 * Genders
@@ -181,6 +189,23 @@ public class Programa {
 		
 		// findAll
 		System.out.println(userDAO.findAll());
+
+		/*
+		 * Address_users
+		 */
+		System.out.println("\naddress_users");
+		
+		Address_users adddressUser = new Address_users();
+		Address_usersDAO adddressUserDAO = DAOFactory.createAddress_usersDAO();
+		
+		// associate
+		adddressUserDAO.associate(2, "02167367007");
+		
+		// associate
+		adddressUserDAO.associate(1, "02167367007");
+		
+		// findAll
+		System.out.println(adddressUserDAO.findAll());
 		
 		/*
 		 * Payment_methods

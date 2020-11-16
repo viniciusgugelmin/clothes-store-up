@@ -6,8 +6,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.clothesstore.dao.Address_usersDAO;
+import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.UsersDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
+import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Users;

@@ -1,6 +1,9 @@
 package com.github.clothesstore.requests;
 
+import java.util.List;
+
 import com.github.clothesstore.dao.Payment_methodsDAO;
+import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.model.Payment_methods;
 import com.github.clothesstore.model.Payment_methods_data;
@@ -23,6 +26,17 @@ public class Payment_methods_dataRequest {
 		}
 		
 		if (paymentMethod.getType().equals("BANK_SLIP")) {
+			
+			Payment_methods_dataDAO paymentMethodDataDAO = DAOFactory.createPayment_methods_dataDAO();
+			List<Payment_methods_data> paymentMethodData = paymentMethodDataDAO.findByType(payment_method_type);
+			
+			if (!paymentMethodData.isEmpty()) {
+				validationReturn.setStatus(422);
+				validationReturn.setResponse("payment_method already in use");
+				
+				return validationReturn;
+			}
+			
 			validationReturn.setResponse("BANK_SLIP");
 			
 			return validationReturn;
