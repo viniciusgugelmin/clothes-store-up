@@ -9,6 +9,7 @@ import java.util.List;
 import com.github.clothesstore.dao.Address_usersDAO;
 import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.UsersDAO;
+import com.github.clothesstore.dao.Users_payment_methods_dataDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
@@ -70,6 +71,9 @@ public class UsersDAOJDBC implements UsersDAO {
 		// Delete dependencies
 		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
 		addressUserDAO.deleteByDocument(document);
+		
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
+		userPaymentMethodDataDAO.deleteByDocument(document);
 		// Delete dependencies
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
@@ -93,9 +97,11 @@ public class UsersDAOJDBC implements UsersDAO {
 		// Delete dependencies
 		List<Users> arrayList = this.findByGender(gender);
 		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
 		
 		for (Users item : arrayList) {
 			addressUserDAO.deleteByDocument(item.getDocument());
+			userPaymentMethodDataDAO.deleteByDocument(item.getDocument());
 		}
 		// Delete dependencies
 		
@@ -118,9 +124,11 @@ public class UsersDAOJDBC implements UsersDAO {
 		// Delete dependencies
 		List<Users> arrayList = this.findByDocumentId(document_id);
 		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
-		
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
+
 		for (Users item : arrayList) {
 			addressUserDAO.deleteByDocument(item.getDocument());
+			userPaymentMethodDataDAO.deleteByDocument(item.getDocument());
 		}
 		// Delete dependencies
 		

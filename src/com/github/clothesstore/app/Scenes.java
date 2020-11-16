@@ -1,20 +1,8 @@
 package com.github.clothesstore.app;
 
-import com.github.clothesstore.dao.AddressDAO;
-import com.github.clothesstore.dao.Address_usersDAO;
-import com.github.clothesstore.dao.Documents_typesDAO;
-import com.github.clothesstore.dao.GendersDAO;
-import com.github.clothesstore.dao.Payment_methodsDAO;
-import com.github.clothesstore.dao.Payment_methods_dataDAO;
-import com.github.clothesstore.dao.UsersDAO;
-import com.github.clothesstore.dao.model.DAOFactory;
-import com.github.clothesstore.model.Address;
-import com.github.clothesstore.model.Address_users;
-import com.github.clothesstore.model.Documents_types;
-import com.github.clothesstore.model.Genders;
-import com.github.clothesstore.model.Payment_methods;
-import com.github.clothesstore.model.Payment_methods_data;
-import com.github.clothesstore.model.Users;
+import com.github.clothesstore.model.*;
+import com.github.clothesstore.dao.*;
+import com.github.clothesstore.dao.model.*;
 
 public class Scenes {
 
@@ -268,13 +256,32 @@ public class Scenes {
 		// findByType
 		System.out.println(paymentMethodDataDAO.findByType(1));
 		
-		// findByType
+		// findAll
 		System.out.println(paymentMethodDataDAO.findAll());
 		
 		// deleteById
-		paymentMethodDataDAO.deleteById(1);
+		//paymentMethodDataDAO.deleteById(1);
 		
 		// deleteByType
-		paymentMethodDataDAO.deleteByType(1);
+		//paymentMethodDataDAO.deleteByType(1);
+	}
+	
+	public static void Users_payment_methods_data() {
+
+		System.out.println("\nusers_payment_methods_data");
+		
+		Users_payment_methods_data userPaymentMethodData = new Users_payment_methods_data();
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
+
+		// associate
+		userPaymentMethodDataDAO.associate(1, "02167367007");
+		
+		// findAll
+		System.out.println(userPaymentMethodDataDAO.findAll());
+		
+		Users user = new Users();
+		UsersDAO userDAO = DAOFactory.createUsersDAO();
+		
+		userDAO.deleteByDocument("02167367007");
 	}
 }

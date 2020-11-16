@@ -7,12 +7,14 @@ import java.util.List;
 
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.Payment_methods_dataDAO;
+import com.github.clothesstore.dao.Users_payment_methods_dataDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Payment_methods;
 import com.github.clothesstore.model.Payment_methods_data;
+import com.github.clothesstore.model.Users;
 import com.github.clothesstore.requests.Payment_methodsRequest;
 import com.github.clothesstore.requests.Payment_methods_dataRequest;
 import com.github.clothesstore.requests.ValidationReturn;
@@ -58,6 +60,11 @@ public class Payment_methods_dataDAOJDBC implements Payment_methods_dataDAO {
 			throw new DBException(validation.toString());
 		}
 		
+		// Delete dependencies
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
+		userPaymentMethodDataDAO.deleteByPaymentMethodDataId(id);
+		// Delete dependencies
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM payment_methods_data WHERE id='" + id + "';");
@@ -73,6 +80,15 @@ public class Payment_methods_dataDAOJDBC implements Payment_methods_dataDAO {
 		if (!validation.getStatus().equals(200)) {
 			throw new DBException(validation.toString());
 		}
+		
+		// Delete dependencies
+		List<Payment_methods_data> arrayList = this.findByType(payment_method_type);
+		Users_payment_methods_dataDAO userPaymentMethodDataDAO = DAOFactory.createUsers_payment_methods_dataDAO();
+		
+		for (Payment_methods_data item : arrayList) {
+			userPaymentMethodDataDAO.deleteByPaymentMethodDataId(item.getId());
+		}
+		// Delete dependencies
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		

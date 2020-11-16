@@ -8,13 +8,16 @@ import com.github.clothesstore.model.Address_users;
 import com.github.clothesstore.model.Payment_methods;
 import com.github.clothesstore.model.Payment_methods_data;
 import com.github.clothesstore.model.Users;
+import com.github.clothesstore.model.Users_payment_methods_data;
 
 public interface Users_payment_methods_dataDAO {
 	
-	void associate(Integer id_address, String document_user);
+	void associate(Integer payment_method_data_id, String document_user);
+	void deleteById(Integer id);
 	void deleteByDocument(String document);
-	void deleteById(Integer id_address);
-	List<Address_users> findByDocument(String document);
-	List<Address_users> findById(Integer id_address);
-	List<Address_users> findAll();
+	void deleteByPaymentMethodDataId(Integer payment_method_data_id);
+	List<Users_payment_methods_data> findById(Integer id);
+	List<Users_payment_methods_data> findByDocument(String document);
+	List<Users_payment_methods_data> findByPaymentMethodDataId(Integer payment_method_data_id);
+	List<Users_payment_methods_data> findAll();
 }

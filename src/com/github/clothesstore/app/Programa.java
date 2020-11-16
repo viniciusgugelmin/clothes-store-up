@@ -13,6 +13,7 @@ public class Programa {
 		Scenes.Address_users();
 		Scenes.Payment_methods();
 		Scenes.Payment_methods_data();
+		Scenes.Users_payment_methods_data();
 		
 		DB.closeConnection();
 	}
