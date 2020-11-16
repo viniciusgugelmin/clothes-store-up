@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.AddressDAO;
+import com.github.clothesstore.dao.Address_usersDAO;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.impl.model.DAOJDBC;
+import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Address;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.model.Users;
 import com.github.clothesstore.requests.AddressRequest;
 import com.github.clothesstore.requests.Payment_methodsRequest;
 import com.github.clothesstore.requests.ValidationReturn;
@@ -143,6 +146,11 @@ public class AddressDAOJDBC implements AddressDAO {
 		if (!validation.getStatus().equals(200)) {
 			throw new DBException(validation.toString());
 		}
+		
+		// Delete dependencies
+		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
+		addressUserDAO.deleteById(id);
+		// Delete dependencies
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		

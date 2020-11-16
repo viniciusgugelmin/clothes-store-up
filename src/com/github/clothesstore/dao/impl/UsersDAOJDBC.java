@@ -67,6 +67,11 @@ public class UsersDAOJDBC implements UsersDAO {
 			throw new DBException(validation.toString());
 		}
 		
+		// Delete dependencies
+		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
+		addressUserDAO.deleteByDocument(document);
+		// Delete dependencies
+		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
 		DAOJDBCModel.singleCall("DELETE FROM users WHERE document='" + document + "';");
@@ -85,6 +90,15 @@ public class UsersDAOJDBC implements UsersDAO {
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
+		// Delete dependencies
+		List<Users> arrayList = this.findByGender(gender);
+		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
+		
+		for (Users item : arrayList) {
+			addressUserDAO.deleteByDocument(item.getDocument());
+		}
+		// Delete dependencies
+		
 		DAOJDBCModel.singleCall("DELETE FROM users WHERE gender='" + gender + "';");
 	}
 
@@ -100,6 +114,15 @@ public class UsersDAOJDBC implements UsersDAO {
 		}
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		
+		// Delete dependencies
+		List<Users> arrayList = this.findByDocumentId(document_id);
+		Address_usersDAO addressUserDAO = DAOFactory.createAddress_usersDAO();
+		
+		for (Users item : arrayList) {
+			addressUserDAO.deleteByDocument(item.getDocument());
+		}
+		// Delete dependencies
 		
 		DAOJDBCModel.singleCall("DELETE FROM users WHERE document_id=" + document_id + ";");
 	}
