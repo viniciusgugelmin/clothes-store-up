@@ -1,10 +1,11 @@
 package com.github.clothesstore.requests;
 
+import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.UsersDAO;
-import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.model.Payment_methods_data;
 import com.github.clothesstore.model.Users;
+import com.github.clothesstore.model.ValidationReturn;
 
 public class Users_payment_methods_dataRequest {
 	

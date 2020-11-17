@@ -1,6 +1,7 @@
 package com.github.clothesstore.requests;
 
 import com.github.clothesstore.model.Genders;
+import com.github.clothesstore.model.ValidationReturn;
 
 public class GendersRequest {
 	

@@ -6,18 +6,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.Documents_typesDAO;
 import com.github.clothesstore.dao.Payment_methods_dataDAO;
 import com.github.clothesstore.dao.UsersDAO;
-import com.github.clothesstore.dao.impl.model.DAOJDBC;
-import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Documents_types;
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.model.ValidationReturn;
 import com.github.clothesstore.requests.Documents_typesRequest;
 import com.github.clothesstore.requests.Payment_methodsRequest;
-import com.github.clothesstore.requests.ValidationReturn;
 
 public class Documents_typesDAOJDBC implements Documents_typesDAO {
 	

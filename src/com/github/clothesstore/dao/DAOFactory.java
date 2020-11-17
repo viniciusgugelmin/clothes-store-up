@@ -1,7 +1,6 @@
-package com.github.clothesstore.dao.model;
+package com.github.clothesstore.dao;
 
 import com.github.clothesstore.dao.impl.*;
-import com.github.clothesstore.dao.*;
 
 public class DAOFactory {
 	
@@ -35,5 +34,9 @@ public class DAOFactory {
 	
 	public static Users_payment_methods_dataDAO createUsers_payment_methods_dataDAO() {
 		return new Users_payment_methods_dataDAOJDBC();
+	}
+	
+	public static Products_typesDAO createProducts_typesDAO() {
+		return new Products_typesDAOJDBC();
 	}
 }

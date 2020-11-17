@@ -1,15 +1,12 @@
 package com.github.clothesstore.database;
 
-public class DbIntegrityException extends RuntimeException {
+public class DBIntegrityException extends RuntimeException {
 
 	//Custom exception of referential integrity.
-	
-	//Exce��o personalizada de integridade refer�ncial 
-
 
 	private static final long serialVersionUID = 1L;
 
-	public DbIntegrityException(String msg) {
+	public DBIntegrityException(String msg) {
 		super(msg);
 	}
 }

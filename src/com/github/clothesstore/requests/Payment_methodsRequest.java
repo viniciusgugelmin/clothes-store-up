@@ -1,6 +1,7 @@
 package com.github.clothesstore.requests;
 
 import com.github.clothesstore.model.Payment_methods;
+import com.github.clothesstore.model.ValidationReturn;
 
 public class Payment_methodsRequest {
 	

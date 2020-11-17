@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.Users_payment_methods_dataDAO;
-import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Users_payment_methods_data;
+import com.github.clothesstore.model.ValidationReturn;
 import com.github.clothesstore.requests.Users_payment_methods_dataRequest;
-import com.github.clothesstore.requests.ValidationReturn;
 
 public class Users_payment_methods_dataDAOJDBC implements Users_payment_methods_dataDAO {
 

@@ -7,18 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.GendersDAO;
+import com.github.clothesstore.dao.Products_typesDAO;
 import com.github.clothesstore.dao.UsersDAO;
-import com.github.clothesstore.dao.impl.model.DAOJDBC;
-import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Genders;
 import com.github.clothesstore.model.Payment_methods;
 import com.github.clothesstore.model.Users;
+import com.github.clothesstore.model.ValidationReturn;
 import com.github.clothesstore.requests.Documents_typesRequest;
 import com.github.clothesstore.requests.GendersRequest;
-import com.github.clothesstore.requests.ValidationReturn;
 
 public class GendersDAOJDBC implements GendersDAO {
 
@@ -70,6 +70,9 @@ public class GendersDAOJDBC implements GendersDAO {
 		// Delete dependencies
 		UsersDAO userDAO = DAOFactory.createUsersDAO();
 		userDAO.deleteByGender(gender);
+		
+		Products_typesDAO productTypeDAO = DAOFactory.createProducts_typesDAO();
+		productTypeDAO.deleteByGender(gender);
 		// Delete dependencies
 		
 		DAOJDBC DAOJDBCModel = new DAOJDBC();

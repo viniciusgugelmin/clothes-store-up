@@ -1,4 +1,4 @@
-package com.github.clothesstore.dao.impl.model;
+package com.github.clothesstore.dao.impl;
 
 
 import java.sql.Connection;

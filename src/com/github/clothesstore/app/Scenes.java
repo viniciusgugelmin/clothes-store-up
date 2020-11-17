@@ -2,7 +2,6 @@ package com.github.clothesstore.app;
 
 import com.github.clothesstore.model.*;
 import com.github.clothesstore.dao.*;
-import com.github.clothesstore.dao.model.*;
 
 public class Scenes {
 
@@ -278,5 +277,22 @@ public class Scenes {
 		
 		// findAll
 		System.out.println(userPaymentMethodDataDAO.findAll());
+	}
+	
+	public static void Products_types() {
+		
+		System.out.println("\nproducts_types");
+		
+		Products_types productType = new Products_types();
+		Products_typesDAO productTypeDAO = DAOFactory.createProducts_typesDAO();
+		
+		// associate
+		productType.setGender('M');
+		productType.setSize("XG");
+		productType.setType("Shirt");
+		productTypeDAO.associate(productType);
+		
+		// findAll
+		System.out.println(productTypeDAO.findAll());
 	}
 }

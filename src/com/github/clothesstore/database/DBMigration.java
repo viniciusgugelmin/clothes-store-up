@@ -1,5 +1,5 @@
-package com.github.clothesstore.database.sql;
+package com.github.clothesstore.database;
 
-public class Migration {
+public class DBMigration {
 
 }

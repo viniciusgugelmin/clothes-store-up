@@ -2,11 +2,12 @@ package com.github.clothesstore.requests;
 
 import java.util.List;
 
+import com.github.clothesstore.dao.DAOFactory;
 import com.github.clothesstore.dao.Payment_methodsDAO;
 import com.github.clothesstore.dao.Payment_methods_dataDAO;
-import com.github.clothesstore.dao.model.DAOFactory;
 import com.github.clothesstore.model.Payment_methods;
 import com.github.clothesstore.model.Payment_methods_data;
+import com.github.clothesstore.model.ValidationReturn;
 
 public class Payment_methods_dataRequest {
 	

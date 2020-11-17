@@ -1,6 +1,7 @@
 package com.github.clothesstore.requests;
 
 import com.github.clothesstore.model.Documents_types;
+import com.github.clothesstore.model.ValidationReturn;
 
 public class Documents_typesRequest {
 	

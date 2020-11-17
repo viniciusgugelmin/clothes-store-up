@@ -1,4 +1,4 @@
-package com.github.clothesstore.dao.model;
+package com.github.clothesstore.dao;
 
 public interface DAO<T> {
 	

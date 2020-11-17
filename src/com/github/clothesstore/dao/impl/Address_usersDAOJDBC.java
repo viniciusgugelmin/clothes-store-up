@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.clothesstore.dao.Address_usersDAO;
-import com.github.clothesstore.dao.impl.model.DAOJDBC;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Address_users;
+import com.github.clothesstore.model.ValidationReturn;
 import com.github.clothesstore.requests.Address_usersRequest;
-import com.github.clothesstore.requests.ValidationReturn;
 
 public class Address_usersDAOJDBC implements Address_usersDAO {
 

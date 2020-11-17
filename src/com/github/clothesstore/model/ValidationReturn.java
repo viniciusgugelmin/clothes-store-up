@@ -1,4 +1,4 @@
-package com.github.clothesstore.requests;
+package com.github.clothesstore.model;
 
 public class ValidationReturn {
 	
