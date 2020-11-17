@@ -278,10 +278,5 @@ public class Scenes {
 		
 		// findAll
 		System.out.println(userPaymentMethodDataDAO.findAll());
-		
-		Users user = new Users();
-		UsersDAO userDAO = DAOFactory.createUsersDAO();
-		
-		userDAO.deleteByDocument("02167367007");
 	}
 }
