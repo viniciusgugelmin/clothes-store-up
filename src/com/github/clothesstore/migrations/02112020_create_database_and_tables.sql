@@ -37,8 +37,8 @@ create table `users` (
     `password` varchar(100) not null,
     `gender` char(1) not null,
     primary key(`document`),
-    foreign key(`gender`) references `genders`(`gender`),
-    foreign key(`document_id`) references `documents_types`(`id`)
+    constraint fk_users_genders foreign key(`gender`) references `genders`(`gender`),
+    constraint fk_users_documents_types foreign key(`document_id`) references `documents_types`(`id`)
 );
 
 drop table if exists `address_users`;
@@ -46,8 +46,8 @@ create table `address_users` (
 	`id_address` int not null,
     `document_user` varchar(14) not null,
     primary key(`id_address`, `document_user`),
-    foreign key(`document_user`) references `users`(`document`),
-    foreign key(`id_address`) references `address`(`id`)
+    constraint fk_address_users_users foreign key(`document_user`) references `users`(`document`),
+    constraint fk_address_users_address foreign key(`id_address`) references `address`(`id`)
 );
 
 drop table if exists `payment_methods`;
@@ -65,7 +65,7 @@ create table `payment_methods_data` (
     `expiry_date` char(7),
     `cvc` char(3),
     primary key(`id`),
-    foreign key(`payment_method_type`) references `payment_methods`(`id`)
+    constraint fk_payment_methods_data_payment_methods foreign key(`payment_method_type`) references `payment_methods`(`id`)
 );
 
 drop table if exists `users_payment_methods_data`;
@@ -74,10 +74,10 @@ create table `users_payment_methods_data` (
 	`payment_method_data_id` int not null,
     `user_document` varchar(14) not null,
     primary key(`id`, `payment_method_data_id`, `user_document`),
-    foreign key(`payment_method_data_id`) references `payment_methods_data`(`id`),
-    foreign key(`user_document`) references `users`(`document`)
+    constraint fk_users_payment_methods_data_payment_methods_data foreign key(`payment_method_data_id`) references `payment_methods_data`(`id`),
+    constraint fk_users_payment_methods_data_users foreign key(`user_document`) references `users`(`document`)
 );
-    
+
 drop table if exists `products_types`;
 create table `products_types` (
 	`id` int auto_increment not null,
@@ -85,7 +85,7 @@ create table `products_types` (
     `gender` char(1) not null,
     `size` char(3) not null,
     primary key(`id`, `type`, `gender`, `size`),
-    foreign key(`gender`) references `genders`(`gender`)
+    constraint fk_products_types_genders foreign key(`gender`) references `genders`(`gender`)
 );
 
 drop table if exists `products`;
@@ -98,7 +98,7 @@ create table `products` (
     `discount` float unsigned,
     `quantity_stock` int unsigned not null, 
     primary key(`id`),
-    foreign key(`type_id`) references `products_types`(`id`)
+    constraint fk_products_products_types foreign key(`type_id`) references `products_types`(`id`)
 );
 
 drop table if exists `sales`;
@@ -106,5 +106,6 @@ create table `sales` (
 	`product_id` int not null,
     `buyer_id` int not null,
     `created_at` datetime not null,
-    foreign key(`buyer_id`) references `users_payment_methods_data`(`id`)
+    constraint fk_sales_users_payment_methods_data foreign key(`buyer_id`) references `users_payment_methods_data`(`id`)
 );
+address
