@@ -108,4 +108,3 @@ create table `sales` (
     `created_at` datetime not null,
     constraint fk_sales_users_payment_methods_data foreign key(`buyer_id`) references `users_payment_methods_data`(`id`)
 );
-address
