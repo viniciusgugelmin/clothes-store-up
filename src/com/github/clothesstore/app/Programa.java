@@ -7,7 +7,7 @@ public class Programa {
 	
 	public static void main(String[] args) {
 		
-		DBMigration.migrate("19112020_alter_tables_constraints", 2);
+		DBMigration.migrate("01112020_alter_tables_constraints", 2);
 		DBMigration.migrate("02112020_create_database_and_tables", 4);
 
 		Scenes.Address();
