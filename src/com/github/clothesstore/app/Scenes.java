@@ -295,4 +295,24 @@ public class Scenes {
 		// findAll
 		System.out.println(productTypeDAO.findAll());
 	}
+	
+	public static void Products() {
+		
+		System.out.println("\nproducts");
+		
+		Products product = new Products();
+		ProductsDAO productDAO = DAOFactory.createProductsDAO();
+		
+		// associate
+		product.setType_id(1);
+		product.setBrand("Nike");
+		product.setPrice(50);
+		product.setName("Dri-Fit Breathe Run Mens T-Shirt - Black");
+		product.setDiscount(0.1);
+		product.setQuantity_stock(20);
+		productDAO.associate(product);
+		
+		// findAll
+		System.out.println(productDAO.findAll());
+	}
 }

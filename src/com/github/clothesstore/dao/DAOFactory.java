@@ -39,4 +39,8 @@ public class DAOFactory {
 	public static Products_typesDAO createProducts_typesDAO() {
 		return new Products_typesDAOJDBC();
 	}
+	
+	public static ProductsDAO createProductsDAO() {
+		return new ProductsDAOJDBC();
+	}
 }
