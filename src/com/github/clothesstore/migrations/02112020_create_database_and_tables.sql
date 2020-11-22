@@ -105,7 +105,7 @@ drop table if exists `sales`;
 create table `sales` (
 	`product_id` int not null,
     `buyer_id` int not null,
-    `created_at` datetime not null,
+    `created_at` varchar(50) not null,
     constraint fk_sales_products foreign key(`product_id`) references `products`(`id`),
     constraint fk_sales_users_payment_methods_data foreign key(`buyer_id`) references `users_payment_methods_data`(`id`)
 );

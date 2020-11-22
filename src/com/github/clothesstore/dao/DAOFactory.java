@@ -43,4 +43,8 @@ public class DAOFactory {
 	public static ProductsDAO createProductsDAO() {
 		return new ProductsDAOJDBC();
 	}
+	
+	public static SalesDAO createSalesDAO() {
+		return new SalesDAOJDBC();
+	}
 }

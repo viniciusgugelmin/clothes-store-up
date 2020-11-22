@@ -315,4 +315,20 @@ public class Scenes {
 		// findAll
 		System.out.println(productDAO.findAll());
 	}
+	
+	public static void Sales() {
+		
+		System.out.println("\nsales");
+		
+		Sales sale = new Sales();
+		SalesDAO saleDAO = DAOFactory.createSalesDAO();
+		
+		// associate
+		sale.setProduct_id(1);
+		sale.setBuyer_id(1);
+		saleDAO.associate(sale);
+		
+		// findAll
+		System.out.println(saleDAO.findAll());
+	}
 }

@@ -6,10 +6,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.clothesstore.dao.Address_usersDAO;
+import com.github.clothesstore.dao.DAOFactory;
+import com.github.clothesstore.dao.ProductsDAO;
 import com.github.clothesstore.dao.Products_typesDAO;
+import com.github.clothesstore.dao.UsersDAO;
+import com.github.clothesstore.dao.Users_payment_methods_dataDAO;
 import com.github.clothesstore.database.DB;
 import com.github.clothesstore.database.DBException;
 import com.github.clothesstore.model.Products_types;
+import com.github.clothesstore.model.Users;
 import com.github.clothesstore.model.ValidationReturn;
 import com.github.clothesstore.requests.Products_typesRequest;
 
@@ -41,6 +47,11 @@ public class Products_typesDAOJDBC implements Products_typesDAO {
 	public void deleteById(Integer id) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
 		
+		// Delete dependencies
+		ProductsDAO productDAO = DAOFactory.createProductsDAO();
+		productDAO.deleteByType_id(id);
+		// Delete dependencies
+		
 		DAOJDBCModel.singleCall("DELETE FROM products_types WHERE id=" + id + ";");
 	}
 
@@ -50,6 +61,15 @@ public class Products_typesDAOJDBC implements Products_typesDAO {
 	@Override
 	public void deleteByGender(char gender) {
 		DAOJDBC DAOJDBCModel = new DAOJDBC();
+		
+		// Delete dependencies
+		List<Products_types> arrayList = this.findByGender(gender);
+		ProductsDAO productsDAO = DAOFactory.createProductsDAO();
+		
+		for (Products_types item : arrayList) {
+			productsDAO.deleteById(item.getId());
+		}
+		// Delete dependencies
 		
 		DAOJDBCModel.singleCall("DELETE FROM products_types WHERE gender='" + gender + "';");
 	}

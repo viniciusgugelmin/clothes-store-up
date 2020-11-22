@@ -20,6 +20,7 @@ public class Programa {
 		Scenes.Users_payment_methods_data();
 		Scenes.Products_types();
 		Scenes.Products();
+		Scenes.Sales();
 
 		DB.closeConnection();
 	}
